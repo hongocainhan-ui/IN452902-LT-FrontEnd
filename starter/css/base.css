@@ -1,0 +1,83 @@
+/* ==========================================================================
+   base.css — đặt lại mặc định của trình duyệt + kiểu cho thẻ HTML trần
+   Chỉ dùng selector thẻ (body, h1, a, img…), chưa dùng class.
+   ========================================================================== */
+
+/* TODO(ch2-T2): box-sizing: border-box cho *, *::before, *::after */
+
+/* TODO(ch2-T2): Bỏ margin mặc định bằng :where(body, h1, h2, h3, p, ul, ol, dl, dd, figure, fieldset)
+   (:where() có specificity 0 nên các lớp sau ghi đè dễ dàng) */
+
+/* TODO(ch2-T2): body — font, cỡ chữ, line-height, màu chữ, màu nền lấy từ token;
+   display: flex + flex-direction: column, và main { flex: 1 } để footer luôn ở đáy */
+
+/* TODO(ch2-T2): Tiêu đề h1/h2/h3 dùng thang chữ token; img/svg { display: block; max-inline-size: 100%; block-size: auto } */
+
+/* TODO(ch2-T2): input, button, select, textarea kế thừa font (font: inherit) */
+
+/* TODO(ch2-T2): :focus-visible — outline 3px màu --color-focus, outline-offset 2px */
+
+/* TODO(ch2-T2): @media (prefers-reduced-motion: reduce) — tắt animation/transition, scroll-behavior: auto */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.25;
+  margin-block: 0 var(--space-3);
+  color: var(--color-text);
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+
+p {
+  margin-block: 0 var(--space-4);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Trạng thái Focus rõ ràng cho trợ năng (Accessibility) */
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 3px;
+}
+
+/* Tắt chuyển động khi người dùng yêu cầu (Nơi duy nhất được dùng !important) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

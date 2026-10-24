@@ -1,0 +1,98 @@
+/* ==========================================================================
+   tokens.css — Design token của EduHub Web
+   Mọi tệp khác chỉ dùng var(--…) khai báo ở đây, không viết mã màu trực tiếp.
+   Ch04 sẽ chép các token này sang @theme của Tailwind.
+   ========================================================================== */
+
+:root {
+  /* Bảng màu gốc của dự án (cho sẵn) */
+  --palette-blue-900: #001d45;   /* tối */
+  --palette-blue-700: #003f87;   /* chính */
+  --palette-blue-50: #f0f7ff;    /* nền */
+  --palette-cyan-500: #00c4cc;   /* nhấn */
+  --palette-ink: #1a1a2e;        /* chữ */
+  --palette-white: #ffffff;
+
+  /* TODO(ch2-T1): Màu theo vai trò (semantic), lấy giá trị từ palette ở trên:
+       --color-primary, --color-on-primary, --color-accent, --color-bg, --color-surface,
+       --color-text, --color-text-muted, --color-border, --color-link, --color-focus,
+       --color-warning, --color-warning-bg, --color-danger, --color-success,
+       --color-header-bg, --color-header-text */
+
+  /* TODO(ch2-T1): Chữ
+       --font-sans: "Be Vietnam Pro", system-ui, … , sans-serif;  (không tải font ngoài)
+       Thang cỡ chữ --text-sm … --text-3xl; ít nhất một cỡ dùng clamp(min, co giãn, max) */
+
+  /* TODO(ch2-T1): Khoảng cách theo thang 4px bằng rem: --space-1 (0.25rem), --space-2, --space-3,
+       --space-4, --space-6, --space-8, --space-12, --space-16 */
+
+  /* TODO(ch2-T1): Bo góc --radius-sm/md/lg/full; đổ bóng --shadow-sm/md/lg;
+       --container-max (vd. 72rem); thời gian chuyển động --duration-fast/normal */
+
+  /* TODO(ch2-T1): Ghi chú breakpoint (var() KHÔNG dùng được trong @media, chỉ để tra cứu):
+       --breakpoint-sm: 40rem;  (640px)   --breakpoint-lg: 64rem;  (1024px) */
+
+  /* TODO(ch2-T1): color-scheme: light dark; */
+}
+
+/* TODO(ch2-T1): Dark mode — trong @media (prefers-color-scheme: dark) { :root { … } }
+   chỉ đổi giá trị các token --color-* (nền tối, chữ sáng, primary sáng hơn để đủ tương phản). */
+   :root {
+     /* Bảng màu Sáng (Light Mode mặc định) */
+     --color-bg: #f8fafc;
+     --color-surface: #ffffff;
+     --color-surface-alt: #f1f5f9;
+     --color-text: #0f172a;
+     --color-text-muted: #475569;
+     --color-primary: #2563eb;
+     --color-primary-hover: #1d4ed8;
+     --color-accent: #f59e0b;
+     --color-border: #e2e8f0;
+     --color-danger: #dc2626;
+     --color-hot-bg: #fee2e2;
+     --color-hot-text: #991b1b;
+   
+     /* Font chữ & Cỡ chữ linh hoạt (Fluid Typography) */
+     --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     --text-sm: 0.875rem;
+     --text-base: 1rem;
+     --text-lg: 1.125rem;
+     --text-xl: clamp(1.25rem, 2vw, 1.5rem);
+     --text-2xl: clamp(1.5rem, 3vw, 2.25rem);
+     --text-3xl: clamp(2rem, 4vw, 3rem);
+   
+     /* Khoảng cách (Spacing) */
+     --space-1: 0.25rem;
+     --space-2: 0.5rem;
+     --space-3: 0.75rem;
+     --space-4: 1rem;
+     --space-6: 1.5rem;
+     --space-8: 2rem;
+     --space-12: 3rem;
+   
+     /* Bo góc & Đổ bóng */
+     --radius-sm: 0.375rem;
+     --radius-md: 0.5rem;
+     --radius-lg: 0.75rem;
+     --radius-full: 9999px;
+     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+   }
+   
+   /* Chế độ tối (Dark Mode): Chỉ đổi giá trị màu của token */
+   @media (prefers-color-scheme: dark) {
+     :root {
+       --color-bg: #0f172a;
+       --color-surface: #1e293b;
+       --color-surface-alt: #334155;
+       --color-text: #f8fafc;
+       --color-text-muted: #94a3b8;
+       --color-primary: #3b82f6;
+       --color-primary-hover: #60a5fa;
+       --color-accent: #fbbf24;
+       --color-border: #334155;
+       --color-danger: #f87171;
+       --color-hot-bg: #7f1d1d;
+       --color-hot-text: #fecaca;
+     }
+   }

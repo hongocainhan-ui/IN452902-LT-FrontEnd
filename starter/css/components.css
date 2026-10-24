@@ -1,0 +1,345 @@
+/* ==========================================================================
+   components.css — các khối giao diện dùng lại được
+   Đặt tên kiểu BEM: block__element--modifier. Dùng nesting gốc (&) để gom kiểu.
+   Ví dụ nesting:
+     .btn {
+       padding: var(--space-2) var(--space-6);
+       &:hover { translate: 0 -1px; }
+     }
+   ========================================================================== */
+
+/* TODO(ch2-T3): .skip-link — đẩy ra khỏi màn hình (translate: 0 -200%), hiện lại khi :focus-visible */
+
+/* TODO(ch2-T3): .brand (logo + chữ, inline-flex), .brand__logo (2.25rem), .brand__name span tô màu nhấn */
+
+/* TODO(ch2-T3): .site-nav__link — viên thuốc bo tròn, cao ≥ 2.75rem (44px);
+   &[aria-current="page"] nền --color-accent để biết đang ở trang nào */
+
+/* TODO(ch2-T3): .btn + .btn--primary / .btn--accent / .btn--ghost, cao ≥ 2.75rem, có transition khi hover;
+   .btn-row xếp nút bằng Flexbox; .hero__eyebrow, .hero__lead, .hero__media */
+
+/* TODO(ch2-T4): .tag (nhãn CLB) và .badge.badge--hot (nhãn "Sắp hết chỗ" màu cảnh báo,
+   ★ chấm tròn nhấp nháy bằng ::before + @keyframes) */
+
+/* TODO(ch2-T4): .card — flex cột, viền, bo góc, nền --color-surface, bóng; hover nhấc lên có transition.
+   &:has(.badge--hot) → viền màu --color-warning (KHÔNG thêm class mới vào HTML).
+   .card__media: aspect-ratio 16/9 + object-fit: cover.
+   .card__body: flex: 1 để card cùng hàng cao bằng nhau. .card__meta, .card__title, .card__text.
+   ★ .card__title a::after { position: absolute; inset: 0 } để bấm cả card. */
+
+/* TODO(ch2-T4): .event-card__info, .event-card__seats (margin-block-start: auto để nằm đáy card);
+   .club-card (viền trên màu nhấn) */
+
+/* TODO(ch2-T4): .faq và .faq__item — summary bỏ tam giác mặc định (list-style: none),
+   thêm dấu "+" bằng ::after, &[open] thì xoay 45deg */
+
+/* TODO(ch2-T5): .table-wrap { overflow-x: auto } và .table (min-inline-size ~40rem, viền, hàng chẵn tô nền,
+   cột số căn phải) — bảng cuộn trong khung, trang không cuộn ngang */
+
+/* TODO(ch2-T5): .back-link, .detail__media, .detail__organizer, .prose (h2, ol/ul, li::marker),
+   .info-card với dl dàn Grid 2 cột (grid-template-columns: auto 1fr), .cta */
+
+/* TODO(ch2-T6): .form (thẻ nền surface, bo góc), fieldset (bỏ viền, min-inline-size: 0), legend.
+   .form__grid: 1 cột, từ 40rem 2 cột. .field: Grid, align-content: start;
+   input/select/textarea full width, cao ≥ 2.75rem, &:focus-visible và &:user-invalid (viền --color-danger).
+   .field--full chiếm cả hàng (grid-column: 1 / -1). */
+
+/* TODO(ch2-T6): .choice-group__options (Flexbox), .choice viên thuốc;
+   .choice:has(input:checked) tô nền; .field--check cho ô đồng ý */
+/* ch2-T3: Skip link (Ẩn mặc định, hiện ra khi nhấn phím Tab) */
+.skip-link {
+   position: absolute;
+   top: -100%;
+   left: var(--space-4);
+   z-index: 100;
+   padding: var(--space-2) var(--space-4);
+   background-color: var(--color-primary);
+   color: #ffffff;
+   border-radius: var(--radius-md);
+   font-weight: 600;
+ 
+   &:focus {
+     top: var(--space-4);
+   }
+ }
+ 
+ /* ch2-T3: Hệ thống Nút bấm (Buttons) */
+ .btn-row {
+   display: flex;
+   flex-wrap: wrap;
+   gap: var(--space-3);
+   margin-block-start: var(--space-4);
+ }
+ 
+ .btn {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   gap: var(--space-2);
+   padding: var(--space-2) var(--space-4);
+   border-radius: var(--radius-md);
+   font-weight: 600;
+   font-size: var(--text-base);
+   border: 1px solid transparent;
+   cursor: pointer;
+   text-decoration: none;
+   transition: background-color 0.2s ease, transform 0.15s ease;
+ 
+   &:hover {
+     text-decoration: none;
+   }
+ 
+   &.btn--primary {
+     background-color: var(--color-primary);
+     color: #ffffff;
+ 
+     &:hover {
+       background-color: var(--color-primary-hover);
+     }
+   }
+ 
+   &.btn--accent {
+     background-color: var(--color-accent);
+     color: #0f172a;
+   }
+ 
+   &.btn--ghost {
+     background-color: transparent;
+     border-color: var(--color-border);
+     color: var(--color-text);
+ 
+     &:hover {
+       background-color: var(--color-surface-alt);
+     }
+   }
+ }
+ 
+ /* Khối CTA */
+ .cta {
+   background-color: var(--color-surface);
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius-lg);
+   padding: var(--space-8);
+   text-align: center;
+ }
+ 
+ /* ch2-T4: Card theo chuẩn BEM + CSS Nesting + bộ chọn :has() */
+ .card,
+ .club-card,
+ .info-card {
+   background-color: var(--color-surface);
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius-lg);
+   overflow: hidden;
+   box-shadow: var(--shadow-sm);
+   display: flex;
+   flex-direction: column;
+   transition: transform 0.2s ease, box-shadow 0.2s ease;
+ 
+   &:hover {
+     transform: translateY(-2px);
+     box-shadow: var(--shadow-md);
+   }
+ 
+   /* Dùng :has() đổi viền nổi bật nếu trong Card có nhãn badge--hot */
+   &:has(.badge--hot) {
+     border-color: var(--color-accent);
+   }
+ 
+   & .card__media {
+     aspect-ratio: 16 / 9;
+     background-color: var(--color-surface-alt);
+     overflow: hidden;
+ 
+     & img {
+       width: 100%;
+       height: 100%;
+       object-fit: cover;
+     }
+   }
+ 
+   & .card__body {
+     padding: var(--space-6);
+     display: flex;
+     flex-direction: column;
+     flex: 1;
+     gap: var(--space-2);
+   }
+ 
+   & .card__meta {
+     display: flex;
+     flex-wrap: wrap;
+     align-items: center;
+     gap: var(--space-2);
+     font-size: var(--text-sm);
+   }
+ 
+   & .card__title {
+     font-size: var(--text-xl);
+     margin: 0;
+   }
+ 
+   & .card__text,
+   & .event-card__info,
+   & .event-card__seats {
+     color: var(--color-text-muted);
+     font-size: var(--text-sm);
+     margin: 0;
+   }
+ }
+ 
+ .club-card,
+ .info-card {
+   padding: var(--space-6);
+ }
+ 
+ /* Tag & Badge */
+ .tag,
+ .badge {
+   display: inline-block;
+   padding: var(--space-1) var(--space-2);
+   border-radius: var(--radius-full);
+   font-size: var(--text-sm);
+   font-weight: 600;
+   background-color: var(--color-surface-alt);
+   color: var(--color-text);
+ }
+ 
+ .badge--hot {
+   background-color: var(--color-hot-bg);
+   color: var(--color-hot-text);
+ }
+ 
+ /* ch2-T4: Khu vực câu hỏi thường gặp (FAQ) */
+ .faq {
+   display: grid;
+   gap: var(--space-3);
+ }
+ 
+ .faq__item {
+   background-color: var(--color-surface);
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius-md);
+   padding: var(--space-4);
+ 
+   & summary {
+     font-weight: 600;
+     cursor: pointer;
+   }
+ 
+   &[open] summary {
+     color: var(--color-primary);
+     margin-block-end: var(--space-2);
+   }
+ }
+ 
+ /* ch2-T5: Bảng dữ liệu cuộn ngang trong khung (không làm vỡ trang mobile) */
+ .table-wrap {
+   width: 100%;
+   overflow-x: auto;
+   background-color: var(--color-surface);
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius-md);
+ }
+ 
+ .table {
+   width: 100%;
+   border-collapse: collapse;
+   min-width: 36rem;
+ 
+   & th,
+   & td {
+     padding: var(--space-3) var(--space-4);
+     text-align: left;
+     border-block-end: 1px solid var(--color-border);
+   }
+ 
+   & th {
+     background-color: var(--color-surface-alt);
+     font-weight: 600;
+   }
+ }
+ 
+ /* ch2-T6: Biểu mẫu (Form) 2 cột, :has(input:checked) và :user-invalid */
+ .form {
+   background-color: var(--color-surface);
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius-lg);
+   padding: var(--space-6);
+ }
+ 
+ .form__grid {
+   display: grid;
+   grid-template-columns: 1fr;
+   gap: var(--space-4);
+ }
+ 
+ @media (min-width: 40rem) {
+   .form__grid {
+     grid-template-columns: repeat(2, 1fr);
+   }
+ 
+   .field--full {
+     grid-column: 1 / -1;
+   }
+ }
+ 
+ .field {
+   display: flex;
+   flex-direction: column;
+   gap: var(--space-1);
+ 
+   & label {
+     font-weight: 600;
+     font-size: var(--text-sm);
+   }
+ 
+   & input:not([type="checkbox"]):not([type="radio"]),
+   & select,
+   & textarea {
+     width: 100%;
+     padding: var(--space-2) var(--space-3);
+     border: 1px solid var(--color-border);
+     border-radius: var(--radius-md);
+     background-color: var(--color-bg);
+     color: var(--color-text);
+     font: inherit;
+ 
+     /* Báo lỗi thông minh khi người dùng nhập sai */
+     &:user-invalid {
+       border-color: var(--color-danger);
+       outline-color: var(--color-danger);
+     }
+   }
+ }
+ 
+ .field--check {
+   flex-direction: row;
+   align-items: center;
+   gap: var(--space-2);
+ }
+ 
+ /* Nhóm nút chọn Radio/Checkbox nổi bật với :has(input:checked) */
+ .choice-group__options {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+   gap: var(--space-3);
+   margin-block-start: var(--space-2);
+ }
+ 
+ .choice {
+   display: flex;
+   align-items: center;
+   gap: var(--space-2);
+   padding: var(--space-3);
+   border: 1px solid var(--color-border);
+   border-radius: var(--radius-md);
+   cursor: pointer;
+   transition: border-color 0.15s ease, background-color 0.15s ease;
+ 
+   &:has(input:checked) {
+     border-color: var(--color-primary);
+     background-color: var(--color-surface-alt);
+     font-weight: 600;
+   }
+ }
