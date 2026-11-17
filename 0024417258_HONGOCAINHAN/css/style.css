@@ -1,0 +1,239 @@
+/* Câu 1b: viết CSS tại đây */
+
+/* Câu 1b: viết CSS tại đây */
+
+/* 1. Biến trong :root cho màu chính #006CB4, màu cảnh báo #E40C24, khoảng cách */
+:root {
+  --primary-color: #006CB4;
+  --warning-color: #E40C24;
+  --text-color: #1f2937;
+  --muted-color: #4b5563;
+  --border-color: #d1d5db;
+  --bg-light: #f9fafb;
+  --white: #ffffff;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --radius: 8px;
+}
+
+/* Mọi phần tử box-sizing: border-box */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-light);
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--space-md);
+}
+
+/* 2. Đầu trang dùng Flexbox: logo trái, menu phải */
+.site-header {
+  background-color: var(--white);
+  border-bottom: 2px solid var(--primary-color);
+  padding: var(--space-md) 0;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+}
+
+.logo {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.main-nav {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.main-nav a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.main-nav a:hover {
+  color: var(--primary-color);
+}
+
+/* Nội dung chính */
+.main-content {
+  flex: 1;
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-xl);
+}
+
+.main-content h1 {
+  margin-top: 0;
+  margin-bottom: var(--space-md);
+  color: var(--primary-color);
+}
+
+/* Form tìm kiếm */
+.search-form {
+  display: flex;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.search-form input[type="search"] {
+  flex: 1;
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  font-size: 1rem;
+}
+
+.search-form input[type="search"]:focus {
+  outline: 2px solid var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.search-form button {
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.search-form button:hover {
+  opacity: 0.9;
+}
+
+/* Trạng thái */
+.status-message {
+  margin: var(--space-sm) 0 var(--space-md);
+  font-weight: 500;
+  color: var(--muted-color);
+}
+
+/* Danh sách card dùng Grid theo kiểu mobile-first: 1 cột; từ 768px 2 cột; từ 1200px 3 cột */
+.event-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .event-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .event-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 3. Card có viền, bo góc, khoảng đệm; ảnh không tràn card */
+.event-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.event-card img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: calc(var(--radius) - 2px);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.card-title {
+  margin: var(--space-xs) 0;
+  font-size: 1.15rem;
+}
+
+.card-title a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  text-decoration: underline;
+}
+
+.card-time,
+.card-location,
+.card-seats {
+  margin: 0;
+  color: var(--muted-color);
+  font-size: 0.95rem;
+}
+
+.seats {
+  display: inline-block;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+/* Nhãn "Hết chỗ" chữ trắng nền màu cảnh báo */
+.badge-full {
+  background-color: var(--warning-color);
+  color: var(--white);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+  font-size: 0.875rem;
+}
+
+/* Chân trang */
+.site-footer {
+  background-color: var(--white);
+  border-top: 1px solid var(--border-color);
+  padding: var(--space-md) 0;
+  text-align: center;
+  color: var(--muted-color);
+}

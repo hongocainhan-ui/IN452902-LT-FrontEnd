@@ -1,0 +1,152 @@
+<!-- Câu 1a: viết trang danh sách sự kiện tại đây -->
+ <!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduHub Web - Sự kiện sắp diễn ra</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Nội dung trang sẽ viết ở đây -->
+
+    <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">EduHub Web</a>
+      <nav class="main-nav">
+        <a href="index.html">Trang chủ</a>
+        <a href="#event-list">Sự kiện</a>
+        <a href="#register">Đăng ký</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container main-content">
+    <h1>Sự kiện sắp diễn ra</h1>
+
+    <!-- Bước 3 và Bước 4 sẽ đặt ở đây -->
+
+        <form id="search-form" class="search-form">
+      <label for="keyword" class="sr-only">Tìm kiếm sự kiện</label>
+      <input type="search" id="keyword" name="keyword" placeholder="Tìm sự kiện...">
+      <button type="submit">Tìm</button>
+    </form>
+
+    <p id="status" class="status-message"></p>
+
+    <div id="event-list" class="event-list">
+
+      <!-- Bước 4: đặt 2 card mẫu vào đây -->
+             <!-- Card 1: Còn chỗ -->
+      <article class="event-card">
+        <img src="img/event.svg" alt="Workshop Git & GitHub cho tân sinh viên">
+        <div class="card-body">
+          <h2 class="card-title">
+            <a href="event-detail.html?id=22222222-2222-4222-8222-000000000001">Workshop Git &amp; GitHub cho tân sinh viên</a>
+          </h2>
+          <p class="card-time">
+            🕒 <time datetime="2026-09-12T01:00:00.000Z">08:00 12/09/2026</time>
+          </p>
+          <p class="card-location">📍 Phòng máy A3.201</p>
+          <p class="card-seats">
+            <span class="seats">Còn 12/40 chỗ</span>
+          </p>
+        </div>
+      </article>
+
+      <!-- Card 2: Hết chỗ -->
+      <article class="event-card">
+        <img src="img/event.svg" alt="Hackathon EduHub 24 giờ">
+        <div class="card-body">
+          <h2 class="card-title">
+            <a href="event-detail.html?id=22222222-2222-4222-8222-000000000004">Hackathon EduHub 24 giờ</a>
+          </h2>
+          <p class="card-time">
+            🕒 <time datetime="2026-12-19T01:00:00.000Z">08:00 19/12/2026</time>
+          </p>
+          <p class="card-location">📍 Phòng máy A3.205</p>
+          <p class="card-seats">
+            <span class="seats badge-full">Hết chỗ</span>
+          </p>
+        </div>
+      </article>
+    
+      /cau 1b
+
+      :root {
+  --primary-color: #006CB4;   /* Màu chính xanh dương */
+  --warning-color: #E40C24;   /* Màu cảnh báo đỏ */
+  --space-xs: 0.25rem;        /* 4px */
+  --space-sm: 0.5rem;         /* 8px */
+  --space-md: 1rem;           /* 16px */
+  --space-lg: 1.5rem;         /* 24px */
+  --radius: 8px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Đầu trang Flexbox: logo trái, menu phải */
+.header-inner {
+  display: flex;
+  justify-content: space-between; /* Đẩy 2 phần tử con (logo và nav) ra 2 đầu trái - phải */
+  align-items: center;            /* Căn giữa theo chiều dọc */
+}
+
+/* Danh sách card Grid theo kiểu mobile-first */
+.event-list {
+  display: grid;
+  grid-template-columns: 1fr;     /* Mặc định điện thoại (< 768px): 1 cột */
+  gap: var(--space-lg);
+}
+
+@media (min-width: 768px) {
+  .event-list {
+    grid-template-columns: repeat(2, 1fr); /* Từ 768px trở lên: 2 cột đều nhau */
+  }
+}
+
+@media (min-width: 1200px) {
+  .event-list {
+    grid-template-columns: repeat(3, 1fr); /* Từ 1200px trở lên: 3 cột đều nhau */
+  }
+}
+
+.event-card {
+  border: 1px solid #d1d5db;      /* Có viền */
+  border-radius: var(--radius);   /* Bo góc */
+  padding: var(--space-md);       /* Khoảng đệm */
+  background-color: #ffffff;
+}
+
+.event-card img {
+  display: block;
+  width: 100%;
+  max-width: 100%;                /* Ảnh không bao giờ tràn khỏi card */
+  height: auto;
+}
+
+.badge-full {
+  background-color: var(--warning-color); /* Nền màu cảnh báo #E40C24 */
+  color: #ffffff;                         /* Chữ trắng */
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: 4px;
+}
+
+
+    </div>
+
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; 2026 EduHub Web</p>
+    </div>
+  </footer>
+   
+
+  <script src="js/app.js"></script>
+</body>
+</html>
